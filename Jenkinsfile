@@ -22,21 +22,7 @@ pipeline {
                 sh 'mvn verify -DskipTests' 
             }
      }
-
-     stage('Maven clean install') { 
-            steps {
-                sh 'mvn clean install' 
-            }
-     }
-       
-     stage("mvn Package") {
-            steps {
-                script {
-                    sh "mvn package -DskipTests=true"
-                }
-            }
-        }
-     stage ("SonarQube Check") {
+      stage ("SonarQube Check") {
             
             steps{
                 
@@ -50,6 +36,20 @@ pipeline {
                     
                 }
             }
+     stage('Maven clean install') { 
+            steps {
+                sh 'mvn clean install' 
+            }
+     }
+       
+     stage("mvn Package") {
+            steps {
+                script {
+                    sh "mvn package -DskipTests=true"
+                }
+            }
+        }
+    
 
        stage("Nexus Deploy") {
             steps {
