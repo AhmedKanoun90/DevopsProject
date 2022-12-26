@@ -36,6 +36,21 @@ pipeline {
                 }
             }
         }
+     stage ("SonarQube Check") {
+            
+            steps{
+                
+                script{
+                    
+                    withSonarQubeEnv(credentialsId: 'sonar-api') {
+                        
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                   }
+                    
+                }
+            }
+
        stage("Nexus Deploy") {
             steps {
                 script {
