@@ -22,6 +22,16 @@ pipeline {
                 sh 'mvn verify -DskipTests' 
             }
      }
+
+ stage("SonarQube Analysis") {
+          agent any  
+           steps {
+                  sh ''mvn clean verify sonar:sonar -Dsonar.projectKey=AchatProject -Dsonar.host.url=http://
+
+http://localhost:9000 -Dsonar.login=sqp_283fc84b786807e485a3cc54e3d9dcb19f00a1cd'
+                  echo 'sonar static analysis done'
+           }
+         }
      stage('Maven clean install') { 
             steps {
                 sh 'mvn clean install' 
