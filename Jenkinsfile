@@ -30,7 +30,7 @@ pipeline {
                     
                     withSonarQubeEnv(credentialsId: 'sonar-api') {
                         
-                        sh 'mvn clean package sonar:sonar'
+                        sh 'mvn -DskipTests clean package sonar:sonar'
                     }
                    }
                     
@@ -54,7 +54,7 @@ pipeline {
        stage("Nexus Deploy") {
             steps {
                 script {
-                    sh "mvn clean package deploy:deploy -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=1.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://http://http://192.168.43.20:8081/repository/maven-releases/ -Dfile=target/tpAchatProject-1.0.jar"
+                    sh "mvn clean package deploy:deploy -DgroupId=com.esprit.examen -DartifactId=tpAchatProject -Dversion=1.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://192.168.1.131:8081/repository/maven-releases/ -Dfile=target/tpAchatProject-1.0.jar"
                 }
             }
         }
